@@ -19,6 +19,7 @@ class HeapTest {
     void simpleInsertPop() {
         Heap<Integer> heap = new Heap<>();
         heap.insert(1);
+        heap.print();
         assertEquals(1, heap.size());
         assertEquals(1, heap.pop());
     }
@@ -42,9 +43,15 @@ class HeapTest {
         assertEquals(6, heap.size());
         assertEquals(1, heap.pop());
 
+        System.out.print("début ");
+        heap.print();//
         heap.insert(0);
         assertEquals(6, heap.size());
-        assertEquals(0, heap.pop());
+
+        System.out.print("début ");
+        heap.print();
+        assertEquals(0, heap.pop());//ici
+        heap.print();
     }
 
     @Test
@@ -60,7 +67,7 @@ class HeapTest {
 
     @Test
     void worksWithPeek() {
-        Heap<Integer> heap = new Heap<>(false, List.of(1,2,3,4,5,6));
+            Heap<Integer> heap = new Heap<>(false, List.of(1,2,3,4,5,6));
         assertEquals(6, heap.size());
         assertEquals(6, heap.peek());
 
