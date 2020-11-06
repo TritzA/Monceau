@@ -51,6 +51,7 @@ class HeapTest {
     void worksReverse() {
         Heap<Integer> heap = new Heap<>(false, List.of(1,2,3,4,5,6));
         assertEquals(6, heap.size());
+        heap.print();
         assertEquals(6, heap.pop());
 
         heap.insert(0);
@@ -80,6 +81,7 @@ class HeapTest {
             List<Integer> randomInts = rnd.ints(listSize, -listSize, listSize).boxed().collect(Collectors.toList());
             List<MockValue> randomMocks = randomInts.stream().map(MockValue::new).collect(Collectors.toList());
             Heap<MockValue> heap = new Heap<>(false, randomMocks);
+            System.out.println(heap.peek().getValue());
             assertEquals(Collections.max(randomInts), heap.peek().getValue());
             // Count the barometer operation for complexity.
             int totalBarometer = 0;
