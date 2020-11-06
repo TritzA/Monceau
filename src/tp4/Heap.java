@@ -28,12 +28,11 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
 
     // O(n): construction avec donnees initiales, allez voir le lien dans la description pour vous aider
     public Heap(boolean isMin, Collection<ValueType> data) {
-        // TODO
-        this.isMin = isMin;//à revoir
+        this.isMin = isMin;
         this.data = new ArrayList<>();
-        for (ValueType value : data) {
-            this.insert(value);
-        }
+
+        this.data.addAll(data);
+        build();
     }
 
     // O(1): on retourne le nombre d'elements dans la liste
@@ -102,18 +101,22 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // Par exemple: si le min/max est une feuille, on appelera resursivement log(n) fois la methode pour monter le noeud
     private void heapify(int idx) {
         // TODO
-        boolean doitMonter = false;
-        if(hasIndex(parentIdx(idx))) {
-            doitMonter = compare(data.get(idx), data.get(parentIdx(idx)));//idx.value<parent.value
-        }
         boolean doitDescendre = false;
-
         if (hasIndex(leftChildIdx(idx))) {
             doitDescendre = compare(data.get(leftChildIdx(idx)), data.get(idx));//idx.valie>left.value
         }
+        boolean doitMonter = false;
+        if (hasIndex(parentIdx(idx))) {
+            doitMonter = compare(data.get(idx), data.get(parentIdx(idx)));//idx.value<parent.value
+        }
 
         int parentIndexe = parentIdx(idx);
-        if (doitMonter) {//si min, idx.value<parent.value
+        if (doitDescendre) {// on sait qu'on doit déscendre
+            //trouver le min ou max a changer,
+            int nouvelIdx = bonEnfant(idx);
+            swap(nouvelIdx, idx);
+            heapify(idx);
+        } else if (doitMonter) {//si min, idx.value<parent.value
             //on doit monter
             while (doitMonter && idx != 0) {
                 swap(idx, parentIdx(idx));
@@ -123,12 +126,8 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
 
                 doitMonter = compare(data.get(idx), data.get(parentIdx(idx)));
             }
-        } else if (doitDescendre) {// on sait qu'on doit déscendre
-            //trouver le min ou max a changer,
-            int nouvelIdx = bonEnfant(idx);
-            swap(nouvelIdx, idx);
-            heapify(idx);
-        }//gérer si égaux
+
+        }
     }
 
     // O(log(n)): on ajoute un element et on preserve les proprietes du monceau
@@ -144,8 +143,9 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // O(n): on s'assure que tous les elements sont bien places dans le tableau,
     // allez voir le lien dans la description pour vous aider
     public void build() {
-        // TODO
-
+        for (int i = size() / 2 - 1; 0 <= i; i--) {
+            heapify(i);
+        }
     }
 
     // O(log(n)): on retire le min ou le max et on preserve les proprietes du monceau
@@ -183,12 +183,13 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     @Override
     public Iterator<ValueType> iterator() {
         // TODO
-        return null;
+        Iterator<ValueType> it = data.iterator();
+        return it;
     }
 
     //POUR DÉBUGGAGE
     public void print() {
-        for (ValueType value:data) {
+        for (ValueType value : data) {
             System.out.print(value);
         }
         System.out.println();
