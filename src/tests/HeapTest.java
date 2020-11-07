@@ -22,6 +22,13 @@ class HeapTest {
         heap.print();
         assertEquals(1, heap.size());
         assertEquals(1, heap.pop());
+        for (int i = 5; i > 0; i--) {
+            heap.insert(i);
+        }
+        heap.print();
+        for (int i = 0; i < 5; i++) {
+            System.out.print(heap.pop()+" ");
+        }
     }
 
     @Test

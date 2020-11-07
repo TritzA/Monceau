@@ -28,6 +28,7 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
 
     // O(n): construction avec donnees initiales, allez voir le lien dans la description pour vous aider
     public Heap(boolean isMin, Collection<ValueType> data) {
+        // TODO
         this.isMin = isMin;
         this.data = new ArrayList<>();
 
@@ -45,16 +46,15 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     private boolean compare(ValueType first, ValueType second) {
         // TODO
         if (isMin) {
-            return first.compareTo(second) < 0;// à inverser?
+            return first.compareTo(second) < 0;
         } else {
-            return first.compareTo(second) > 0;// à inverser?
+            return first.compareTo(second) > 0;
         }
     }
 
     // O(1): on donne l'indice du parent
     private int parentIdx(int idx) {
         // TODO
-        //à revoir, parent de 0 c'est 0, à utiliser ?
         return (idx - 1) / 2;
     }
 
@@ -100,33 +100,54 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // De facon visuelle, ceci ammene un noeud le plus haut possible dans l'arbre
     // Par exemple: si le min/max est une feuille, on appelera resursivement log(n) fois la methode pour monter le noeud
     private void heapify(int idx) {
-        // TODO
-        boolean doitDescendre = false;
-        if (hasIndex(leftChildIdx(idx))) {
-            doitDescendre = compare(data.get(leftChildIdx(idx)), data.get(idx));//idx.valie>left.value
-        }
-        boolean doitMonter = false;
-        if (hasIndex(parentIdx(idx))) {
-            doitMonter = compare(data.get(idx), data.get(parentIdx(idx)));//idx.value<parent.value
-        }
+        int parentIdx = parentIdx(idx);
+        ValueType parentValue = data.get(parentIdx);
 
-        int parentIndexe = parentIdx(idx);
-        if (doitDescendre) {// on sait qu'on doit déscendre
-            //trouver le min ou max a changer,
-            int nouvelIdx = bonEnfant(idx);
-            swap(nouvelIdx, idx);
-            heapify(idx);
-        } else if (doitMonter) {//si min, idx.value<parent.value
-            //on doit monter
-            while (doitMonter && idx != 0) {
-                swap(idx, parentIdx(idx));
+        int leftChildIdx = leftChildIdx(idx);
+        int rightChildIdx = rightChildIdx(idx);
 
-                idx = parentIndexe;
-                parentIndexe = parentIdx(idx);
+        if (hasIndex(leftChildIdx)) {
+            ValueType leftChildValue;
+            ValueType rightChildValue;
+            int childIdx;
 
-                doitMonter = compare(data.get(idx), data.get(parentIdx(idx)));
+            do {
+                //attribution de la valeur de l'enfant de droite
+                leftChildValue = data.get(leftChildIdx);
+                rightChildValue = null;
+
+                if (hasIndex(rightChildIdx)) {
+                    rightChildValue = data.get(rightChildIdx);
+                }
+
+                //choix bon enfant
+                childIdx = leftChildIdx;
+
+                if (hasIndex(rightChildIdx) && compare(rightChildValue, leftChildValue)) {
+                    childIdx = rightChildIdx;
+                }
+
+
+                //on déscent
+                if (compare(data.get(childIdx), data.get(idx))) {
+                    swap(idx, childIdx);
+                } else {
+                    break;
+                }
+
+                idx = childIdx;
+                leftChildIdx = leftChildIdx(idx);
+                rightChildIdx = rightChildIdx(idx);
+            } while (hasIndex(leftChildIdx));
+
+        } else if (compare(data.get(idx), parentValue)) {//on monte
+
+            while (idx != 0 && compare(data.get(idx), data.get(parentIdx(idx)))) {
+                swap(idx, parentIdx);
+
+                idx = parentIdx;
+                parentIdx = parentIdx(idx);
             }
-
         }
     }
 
@@ -143,7 +164,7 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // O(n): on s'assure que tous les elements sont bien places dans le tableau,
     // allez voir le lien dans la description pour vous aider
     public void build() {
-        for (int i = size() / 2 - 1; 0 <= i; i--) {
+        for (int i = size() / 2 - 1; i >= 0; i--) {
             heapify(i);
         }
     }
@@ -151,16 +172,15 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // O(log(n)): on retire le min ou le max et on preserve les proprietes du monceau
     public ValueType pop() {
         // TODO
-        ValueType min = data.get(0);
-        if (data.size() == 1) {
-            data.remove(this.size() - 1);
-        } else {
-            data.set(0, data.remove(this.size() - 1));
+        if (size() == 1) {
+            return data.remove(0);
         }
-        this.heapify(0);//SKIP UNE CONDITION ? ON SAIT QU'ON PARCOURRIRA TT
 
-        return min;
+        ValueType pop = data.get(0);
+        data.set(0, data.remove(this.size() - 1));
+        this.heapify(0);
 
+        return pop;
     }
 
     // O(1): on retourne sans retirer le plus petit ou plus grand element.
@@ -176,7 +196,12 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // O(nlog(n)): On applique l'algorithme Heap Sort, on s'attend a ce que le monceau soit vide a la fin.
     public List<ValueType> sort() {
         // TODO
-        return null;
+        ArrayList<ValueType> list = new ArrayList();
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            list.add(pop());
+        }
+        return list;
     }
 
     // Creation d'un iterateur seulement utilise dans les tests, permet de faire des boucles "for-each"
@@ -190,7 +215,7 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     //POUR DÉBUGGAGE
     public void print() {
         for (ValueType value : data) {
-            System.out.print(value);
+            System.out.print(value + " ");
         }
         System.out.println();
     }

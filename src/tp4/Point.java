@@ -28,13 +28,13 @@ public class Point implements Comparable<Point> {
             return false;
         }
 
-        Point point = (Point)obj;
+        Point point = (Point) obj;
         return point.x.equals(x) && point.y.equals(y);
     }
 
     @Override
     public int compareTo(Point point) {
         // TODO ceci vous sera peut etre utile
-        return 0;
+        return Math.abs(this.x - point.x) + Math.abs(this.y - point.y);
     }
 }

@@ -29,6 +29,25 @@ public final class Interview {
      */
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {
         // TODO
-        return null;
+        ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste
+        ArrayList<Integer> bonAmis = new ArrayList<Integer>();
+
+        for (Integer indiceCentre: centers) {//pour chaque personne étant le centre de son cercle d'ami
+            Point pCentre = points.get(indiceCentre);//on trouve le point qu'est ce centre grâce à son indice
+            for (int i = 0; i < points.size(); i++){//pour tous les points
+                Point p = points.get(i);
+                if (pCentre.compareTo(p) <= circleSize && !pCentre.equals(p)){
+                    //p est un ami de pCentre
+                    if(bonAmis.contains(p)){
+                        mauvaisAmis.add(p);
+                        bonAmis.remove(p);
+                        points.remove(p);
+                    }else{
+                        bonAmis.add(p);
+                    }
+                }
+            }
+        }
+        return mauvaisAmis;
     }
 }
