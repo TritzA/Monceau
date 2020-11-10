@@ -69,6 +69,7 @@ class InterviewTest {
             if (answerFriends.get(0).equals(-1)) {
                 answerFriends.remove(0);
             }
+            System.out.println(answerFriends);
             assertEquals(answerFriends, friendsToRemove);
         }
     }
