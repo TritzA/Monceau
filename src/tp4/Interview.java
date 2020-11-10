@@ -33,10 +33,10 @@ public final class Interview {
         ArrayList<Integer> amisConnus = new ArrayList<Integer>();//liste des amis connus une fois
 
         //Itération sur tout les centres
-        for (int idxCenter = centers.size() - 1; idxCenter >= 0; idxCenter--) {
-            int valeurCentre = centers.get(idxCenter);
-            System.out.println("");
-            System.out.println("---------Nouveau centre qui est " + valeurCentre);
+        for (int idxCentre = centers.size() - 1; idxCentre >= 0; idxCentre--) {
+            int valeurCentre = centers.get(idxCentre);
+            //System.out.println("");
+            //System.out.println("---------Nouveau centre qui est " + valeurCentre);
             Point pCentre = points.get(valeurCentre);//on trouve le point qu'est ce centre grâce à son indice
 
 
@@ -60,14 +60,14 @@ public final class Interview {
 
 
             //Ajoute tous les points sauf le centre dans un monceau
-            System.out.println("LES POINTS AJOUTÉS SONT");
+            //System.out.println("LES POINTS AJOUTÉS SONT");
             for (int i = 0; i < points.size(); i++) {//intération sur les points
                 Point p = points.get(i);
                 if (!p.equals(pCentre)) {
-                    System.out.println(p + " " + pCentre);
+                    //System.out.println(p + " " + pCentre);
                     pq.add(p);
                 } else {
-                    System.out.println("RIEN");
+                    //System.out.println("RIEN");
                 }
             }
 
@@ -75,18 +75,17 @@ public final class Interview {
             //Retire un nombre (circleSize) d'élément du monceau, ce sont les amis du groupe
             for (int i = 0; i < circleSize; i++) {
                 Point inCircle = pq.poll();//poll
-                System.out.println("L'amis dans le cercle est" + inCircle);
+                //System.out.println("L'amis dans le cercle est" + inCircle);
 
                 if (amisConnus.contains(points.indexOf(inCircle)) /*&& !mauvaisAmis.contains(points.indexOf(inCircle))*/) {
                     //Il devient un mauvais amis
-                    System.out.println("On a trouvé un mauvais" + points.indexOf(inCircle));
+                    //System.out.println("On a trouvé un mauvais" + points.indexOf(inCircle));
                     mauvaisAmis.add(points.indexOf(inCircle));
 
                 } else {
                     //Sinon il devient un ami connu
+                    //System.out.println("Ajout de l'ami suivant "+amisConnus.toString());
                     amisConnus.add(points.indexOf(inCircle));
-                    System.out.println("Ajout de l'ami suivant");
-                    System.out.println(amisConnus.toString());
                 }
             }
         }
