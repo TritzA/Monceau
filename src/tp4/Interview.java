@@ -41,6 +41,7 @@ public final class Interview {
 
                 if (pCentre.compareTo(p) <= circleSize && !pCentre.equals(p)){//si on trouve un ami (p) dans le centre de pCentre
                     //p est un ami de pCentre
+
                     if(amisConnus.contains(p)){//s'il a déjà été ajouté dans les amis connus
                         //il devient un mauvais amis
                         mauvaisAmis.add(i);
