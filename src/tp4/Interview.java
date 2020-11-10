@@ -35,6 +35,7 @@ public final class Interview {
         //Itération sur tout les centres
         for (int idxCenter = centers.size() - 1; idxCenter >= 0; idxCenter--) {
             int valeurCentre = centers.get(idxCenter);
+            System.out.println("");
             System.out.println("---------Nouveau centre qui est " + valeurCentre);
             Point pCentre = points.get(valeurCentre);//on trouve le point qu'est ce centre grâce à son indice
 
@@ -59,7 +60,7 @@ public final class Interview {
 
 
             //Ajoute tous les points sauf le centre dans un monceau
-            System.out.println("LES POINTS AJOUTES SONT");
+            System.out.println("LES POINTS AJOUTÉS SONT");
             for (int i = 0; i < points.size(); i++) {//intération sur les points
                 Point p = points.get(i);
                 if (!p.equals(pCentre)) {
@@ -82,7 +83,7 @@ public final class Interview {
                     mauvaisAmis.add(points.indexOf(inCircle));
 
                 } else {
-                    //Sinon il est un bon ami
+                    //Sinon il devient un ami connu
                     amisConnus.add(points.indexOf(inCircle));
                     System.out.println("Ajout de l'ami suivant");
                     System.out.println(amisConnus.toString());
