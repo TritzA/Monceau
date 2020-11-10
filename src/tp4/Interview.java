@@ -46,8 +46,8 @@ public final class Interview {
                 public int compare(Point p1, Point p2) {
                     int distance1 = pCentre.compareTo(p1);
                     int distance2 = pCentre.compareTo(p2);
-                    System.out.println("On compare" + p1 + " et " + p2);
-                    System.out.println("On compare " + distance1 + " et " + distance2);
+                    //System.out.println("On compare" + p1 + " et " + p2);
+                    //System.out.println("On compare " + distance1 + " et " + distance2);
                     if (distance1 > distance2) {
                         return 1;
                     } else if (distance1 < distance2) {
