@@ -31,6 +31,8 @@ class InterviewTest {
         List<Integer> centers = List.of(0, 2);
         List<Point> points = List.of(new Point(0, 0), new Point(1, 1), new Point(2, 2));
         List<Integer> friendsToRemove = Interview.getFriendsToRemove(circleSize, centers, points);
+        System.out.println(friendsToRemove);
+        System.out.println(List.of(1));
         assertEquals(List.of(1), friendsToRemove);
     }
 

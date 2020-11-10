@@ -29,21 +29,24 @@ public final class Interview {
      */
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {
         // TODO
+        // ERREUR circleSize n'est pas la distance, c'est le nombre d'amis dans le cercle (sans compter le centre)
         ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste
-        ArrayList<Integer> bonAmis = new ArrayList<Integer>();
-
+        ArrayList<Integer> amisConnus = new ArrayList<Integer>();
+        //PriorityQueue
         for (Integer indiceCentre: centers) {//pour chaque personne étant le centre de son cercle d'ami
             Point pCentre = points.get(indiceCentre);//on trouve le point qu'est ce centre grâce à son indice
+
             for (int i = 0; i < points.size(); i++){//pour tous les points
                 Point p = points.get(i);
-                if (pCentre.compareTo(p) <= circleSize && !pCentre.equals(p)){
+
+                if (pCentre.compareTo(p) <= circleSize && !pCentre.equals(p)){//si on trouve un ami (p) dans le centre de pCentre
                     //p est un ami de pCentre
-                    if(bonAmis.contains(p)){
-                        mauvaisAmis.add(p);
-                        bonAmis.remove(p);
-                        points.remove(p);
+                    if(amisConnus.contains(p)){//s'il a déjà été ajouté dans les amis connus
+                        //il devient un mauvais amis
+                        mauvaisAmis.add(i);
                     }else{
-                        bonAmis.add(p);
+                        //sinon il est un bon ami
+                        amisConnus.add(i);
                     }
                 }
             }
