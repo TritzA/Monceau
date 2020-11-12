@@ -71,7 +71,7 @@ public final class Interview {
                 Point p = points.get(i);
                 p.setIndex(i);//on profite du passage dans les points pour stocker leur indice
                 
-                if (p.getIndex() != valeurCentre) {
+                if (p.getIndex() != valeurCentre /*&& !pq.contains(p)*/) {//2e cond necesaire
                     pq.add(p);
                 }
             }
@@ -106,3 +106,4 @@ public final class Interview {
         return mauvaisAmis;
     }
 }
+
