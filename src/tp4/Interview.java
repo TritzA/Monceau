@@ -33,14 +33,13 @@ public final class Interview {
         int pointsSize = points.size();
         int centersSize = centers.size();
         PriorityQueue<Integer> pqMauvaisAmis = new PriorityQueue<Integer>();
-        ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste à retourner
-        boolean [] amisConnus = new boolean[pointsSize];//tt à false par défaut, l'indice n indique si le nème ami est connu
+        ArrayList<Integer> mauvaisEnOrdre = new ArrayList<Integer>();//liste à retourner
+        boolean[] amisConnus = new boolean[pointsSize];//tt à false par défaut, l'indice n indique si le nème ami est connu
+        boolean[] mauvaisAmis = new boolean[pointsSize];
 
 
-
-        //Itération sur tout les centres
-        for (int idxCentre = 0; idxCentre < centersSize ; idxCentre++) {
-            int valeurCentre = centers.get(idxCentre);
+        //Itération sur tous les centres
+        for (int valeurCentre : centers) {
             Point pCentre = points.get(valeurCentre);//on trouve le point qu'est ce centre grâce à son indice
 
 
@@ -65,7 +64,6 @@ public final class Interview {
                         }
                     }
                 }
-
             });
 
 
@@ -73,8 +71,8 @@ public final class Interview {
             for (int i = 0; i < pointsSize; i++) {//intération sur les points
                 Point p = points.get(i);
                 p.setIndex(i);//on profite du passage dans les points pour stocker leur indice
-                
-                if (p.getIndex() != valeurCentre /*&& !pq.contains(p)*/) {//2e cond necesaire
+
+                if (p.getIndex() != valeurCentre) {
                     pq.add(p);
                 }
             }
@@ -84,9 +82,10 @@ public final class Interview {
             for (int i = 0; i < circleSize; i++) {
                 Point inCircle = pq.poll();
                 int indiceAmi = inCircle.getIndex();
-                if (amisConnus[indiceAmi] && !pqMauvaisAmis.contains(indiceAmi)) {
+                if (amisConnus[indiceAmi] && !mauvaisAmis[indiceAmi]) {
                     //Il devient un mauvais amis
                     pqMauvaisAmis.add(indiceAmi);
+                    mauvaisAmis[indiceAmi] = true;
                 } else {
                     //Sinon il devient un ami connu
                     amisConnus[indiceAmi] = true;
@@ -97,10 +96,11 @@ public final class Interview {
         // A cette étape, on a une liste qui contient tous les mauvais amis, mais cette liste est non triée
         int pqMauvaisAmisSize = pqMauvaisAmis.size();
         //Nous allons trier la liste à l'aide d'une priorityQueue
+        //System.out.println(pqMauvaisAmis);
         for (int i = 0; i < pqMauvaisAmisSize; i++) {
             //sortir les éléments du plus petit au plus grand
-            mauvaisAmis.add(pqMauvaisAmis.poll());
+            mauvaisEnOrdre.add(pqMauvaisAmis.poll());
         }
-        return mauvaisAmis;
+        return mauvaisEnOrdre;
     }
 }

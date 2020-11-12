@@ -31,8 +31,6 @@ class InterviewTest {
         List<Integer> centers = List.of(0, 2);
         List<Point> points = List.of(new Point(0, 0), new Point(1, 1), new Point(2, 2));
         List<Integer> friendsToRemove = Interview.getFriendsToRemove(circleSize, centers, points);
-        System.out.println(friendsToRemove);
-        System.out.println(List.of(1));
         assertEquals(List.of(1), friendsToRemove);
     }
 
@@ -77,7 +75,7 @@ class InterviewTest {
     void testComplexityInterviewWithTime() throws IOException {
         assertTimeoutPreemptively(Duration.ofSeconds(60), () -> {//devrait être 60
             int increaseRate = 100;//100
-            int maxSize = 1000;//3000 //2200 max
+            int maxSize = 3000;//3000 //2200 max avec un arraylist //2100 des doublons
             ArrayList<Double> Xs = new ArrayList<>();
             ArrayList<Double> Ys = new ArrayList<>();
             for (int listSize = increaseRate; listSize < maxSize; listSize += increaseRate) {
