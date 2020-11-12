@@ -30,12 +30,15 @@ public final class Interview {
      */
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {
         // TODO
+        PriorityQueue<Integer> pqMauvaisAmis = new PriorityQueue<Integer>();
         ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste à retourner
         ArrayList<Integer> amisConnus = new ArrayList<Integer>();//liste des amis connus une fois
         int pointsSize = points.size();
-        
+        int centersSize = centers.size();
+
+
         //Itération sur tout les centres
-        for (int idxCentre = centers.size() - 1; idxCentre >= 0; idxCentre--) {
+        for (int idxCentre = 0; idxCentre < centersSize ; idxCentre++) {
             int valeurCentre = centers.get(idxCentre);
             Point pCentre = points.get(valeurCentre);//on trouve le point qu'est ce centre grâce à son indice
 
@@ -80,9 +83,10 @@ public final class Interview {
             for (int i = 0; i < circleSize; i++) {
                 Point inCircle = pq.poll();
                 int indiceAmi = inCircle.getIndex();
-                if (amisConnus.contains(indiceAmi) && !mauvaisAmis.contains(indiceAmi)) {
+                if (amisConnus.contains(indiceAmi) && !pqMauvaisAmis.contains(indiceAmi)) {
                     //Il devient un mauvais amis
-                    mauvaisAmis.add(indiceAmi);
+                    //System.out.println("ajout"+indiceAmi);
+                    pqMauvaisAmis.add(indiceAmi);
                 } else {
                     //Sinon il devient un ami connu
                     amisConnus.add(indiceAmi);
@@ -91,16 +95,11 @@ public final class Interview {
         }
 
         // A cette étape, on a une liste qui contient tous les mauvais amis, mais cette liste est non triée
-        int tailleMauvaisAmis = mauvaisAmis.size();
+        int pqMauvaisAmisSize = pqMauvaisAmis.size();
         //Nous allons trier la liste à l'aide d'une priorityQueue
-        PriorityQueue<Integer> q = new PriorityQueue<Integer>();
-        for (int i = 0; i < tailleMauvaisAmis; i++) {
-            //ajouter tt les éléments à la Queue
-            q.add(mauvaisAmis.get(i));
-        }
-        for (int i = 0; i < tailleMauvaisAmis; i++) {
+        for (int i = 0; i < pqMauvaisAmisSize; i++) {
             //sortir les éléments du plus petit au plus grand
-            mauvaisAmis.set(i, q.poll());
+            mauvaisAmis.add(pqMauvaisAmis.poll());
         }
         return mauvaisAmis;
     }

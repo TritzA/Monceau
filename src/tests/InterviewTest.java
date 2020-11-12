@@ -77,7 +77,7 @@ class InterviewTest {
     void testComplexityInterviewWithTime() throws IOException {
         assertTimeoutPreemptively(Duration.ofSeconds(60), () -> {//devrait être 60
             int increaseRate = 100;//100
-            int maxSize = 2200;//3000 //2200 max
+            int maxSize = 1000;//3000 //2200 max
             ArrayList<Double> Xs = new ArrayList<>();
             ArrayList<Double> Ys = new ArrayList<>();
             for (int listSize = increaseRate; listSize < maxSize; listSize += increaseRate) {
