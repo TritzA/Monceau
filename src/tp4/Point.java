@@ -5,6 +5,7 @@ public class Point implements Comparable<Point> {
 
     private Integer x;
     private Integer y;
+    private Integer index;
 
     public Point(String xy) {
         String[] xAndY = xy.split(" +");
@@ -36,5 +37,13 @@ public class Point implements Comparable<Point> {
     public int compareTo(Point point) {
         // TODO ceci vous sera peut etre utile
         return Math.abs(this.x - point.x) + Math.abs(this.y - point.y);
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

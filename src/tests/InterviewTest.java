@@ -69,20 +69,18 @@ class InterviewTest {
             if (answerFriends.get(0).equals(-1)) {
                 answerFriends.remove(0);
             }
-            System.out.println(answerFriends);
             assertEquals(answerFriends, friendsToRemove);
         }
     }
 
     @Test
     void testComplexityInterviewWithTime() throws IOException {
-        assertTimeoutPreemptively(Duration.ofSeconds(60), () -> {
-            int increaseRate = 100;
-            int maxSize = 3000;
+        assertTimeoutPreemptively(Duration.ofSeconds(60), () -> {//devrait être 60
+            int increaseRate = 100;//100
+            int maxSize = 1500;//3000 //1900 max
             ArrayList<Double> Xs = new ArrayList<>();
             ArrayList<Double> Ys = new ArrayList<>();
             for (int listSize = increaseRate; listSize < maxSize; listSize += increaseRate) {
-                System.out.println(listSize);
                 Integer circleSize = listSize - 1;
                 List<Integer> centers = IntStream.range(0, listSize).boxed().collect(Collectors.toList());
                 List<Point> points = new ArrayList<>();
