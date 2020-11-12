@@ -30,11 +30,12 @@ public final class Interview {
      */
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {
         // TODO
-        PriorityQueue<Integer> pqMauvaisAmis = new PriorityQueue<Integer>();
-        ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste à retourner
-        ArrayList<Integer> amisConnus = new ArrayList<Integer>();//liste des amis connus une fois
         int pointsSize = points.size();
         int centersSize = centers.size();
+        PriorityQueue<Integer> pqMauvaisAmis = new PriorityQueue<Integer>();
+        ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste à retourner
+        boolean [] amisConnus = new boolean[pointsSize];//tt à false par défaut, l'indice n indique si le nème ami est connu
+
 
 
         //Itération sur tout les centres
@@ -83,13 +84,12 @@ public final class Interview {
             for (int i = 0; i < circleSize; i++) {
                 Point inCircle = pq.poll();
                 int indiceAmi = inCircle.getIndex();
-                if (amisConnus.contains(indiceAmi) && !pqMauvaisAmis.contains(indiceAmi)) {
+                if (amisConnus[indiceAmi] && !pqMauvaisAmis.contains(indiceAmi)) {
                     //Il devient un mauvais amis
-                    //System.out.println("ajout"+indiceAmi);
                     pqMauvaisAmis.add(indiceAmi);
                 } else {
                     //Sinon il devient un ami connu
-                    amisConnus.add(indiceAmi);
+                    amisConnus[indiceAmi] = true;
                 }
             }
         }
