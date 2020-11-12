@@ -71,7 +71,7 @@ public final class Interview {
                 Point p = points.get(i);
                 p.setIndex(i);//on profite du passage dans les points pour stocker leur indice
                 
-                if (p.getIndex() != valeurCentre /*&& !pq.contains(p)*/) {//2e cond necesaire
+                if (p.getIndex() != valeurCentre) {
                     pq.add(p);
                 }
             }
