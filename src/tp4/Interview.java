@@ -33,7 +33,6 @@ public final class Interview {
         ArrayList<Integer> mauvaisAmis = new ArrayList<Integer>();//liste à retourner
         ArrayList<Integer> amisConnus = new ArrayList<Integer>();//liste des amis connus une fois
         int pointsSize = points.size();
-
         
         //Itération sur tout les centres
         for (int idxCentre = centers.size() - 1; idxCentre >= 0; idxCentre--) {
