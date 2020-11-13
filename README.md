@@ -23,10 +23,18 @@ IDE : [Intellij education](https://www.jetbrains.com/fr-fr/idea/download/#sectio
 
 ## Représentation
 
-à revoir Complexité contante de notre algorithme.
+Premier test attestant de la validité de notre algorithme.
 
-![alt text](https://github.com/TritzA/)
+![alt text](https://github.com/TritzA/Monceau/blob/master/images/1.PNG)
 
-à revoir Deux autres exemples que notre algorithme a généré.
+Deuxième test attestant de la validité de notre algorithme.
 
-![alt text](https://github.com/TritzA/)
+![alt text](https://github.com/TritzA/Monceau/blob/master/images/2.PNG)
+
+Troisième test attestant de la validité de notre algorithme.
+
+![alt text](https://github.com/TritzA/Monceau/blob/master/images/3.PNG)
+
+Quatrième test attestant de la validité de notre algorithme.
+
+![alt text](https://github.com/TritzA/Monceau/blob/master/images/4.PNG)
