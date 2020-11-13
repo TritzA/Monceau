@@ -38,4 +38,4 @@ Troisième test attestant de la validité de notre algorithme.
 
 Quatrième test attestant de la validité de notre algorithme.
 
-![alt text](https://github.com/TritzA/Monceau/blob/master/images/4.PNG)
+![alt text](https://github.com/TritzA/Monceau/blob/master/images/4.png)
