@@ -35,7 +35,7 @@ public final class Interview {
 
 
         // Iteration centres
-        for (int valeurCentre : centers) {// O(n) * (O(n*log(n)) + O(n*log(n))) -> O(n) * O(n*log(n)) -> O(n^2*log(n))
+        for (int valeurCentre : centers) {// O(c) * (O(n*log(n)) + O(a*log(n*n))) -> O(c*(n*log(n)+(a*log(n*n))))
             Point pointC = points.get(valeurCentre);
 
 
@@ -64,7 +64,7 @@ public final class Interview {
 
 
             // Traite amis
-            for (int i = 0; i < circleSize; i++) {// O(n) * (O(log(n)) + O(log(n)) -> O(n*log(n))
+            for (int i = 0; i < circleSize; i++) {// O(a) * (O(log(n)) + O(log(n)) -> O(a*log(n*n))
                 Point ami = pqAmis.poll();// O(log(n))
                 assert ami != null;
                 int indiceAmi = ami.getIndex();
