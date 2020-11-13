@@ -32,10 +32,6 @@ Deuxième test attestant de la validité de notre algorithme.
 
 ![alt text](https://github.com/TritzA/Monceau/blob/master/images/2.PNG)
 
-Troisième test attestant de la validité de notre algorithme.
-
-![alt text](https://github.com/TritzA/Monceau/blob/master/images/3.PNG)
-
-Quatrième test attestant de la validité de notre algorithme.
+Toisième test attestant de la validité de notre algorithme.
 
 ![alt text](https://github.com/TritzA/Monceau/blob/master/images/4.png)
