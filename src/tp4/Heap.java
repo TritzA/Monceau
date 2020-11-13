@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Heap<ValueType extends Comparable<? super ValueType>> implements Iterable<ValueType> {
     private ArrayList<ValueType> data;
-    private boolean isMin;
+    private final boolean isMin;
 
     // O(1)
     public Heap() {
@@ -183,7 +183,7 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     // O(nlog(n)): On applique l'algorithme Heap Sort, on s'attend a ce que le monceau soit vide a la fin.
     public List<ValueType> sort() {
         // TODO
-        ArrayList<ValueType> list = new ArrayList();
+        ArrayList<ValueType> list = new ArrayList<>();
         int size = size();
         for (int i = 0; i < size; i++) {
             list.add(pop());
@@ -195,7 +195,6 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
     @Override
     public Iterator<ValueType> iterator() {
         // TODO
-        Iterator<ValueType> it = data.iterator();
-        return it;
+        return data.iterator();
     }
 }
