@@ -100,7 +100,7 @@ class InterviewTest {
 
             LinearRegression regression = new LinearRegression(Xs.toArray(new Double[0]), Ys.toArray(new Double[0]));
             // The trend should be linear between input size and time => R2 ~= 1 => O(n^2 * log(n)). -> tends to n^2 on large numbers
-            System.out.println(regression.R2());
+                System.out.println(regression.R2());
             regression.plot("testComplexityInterviewWithTime");
             assertEquals(1.0, regression.R2(), 0.1);
         }, "Votre algorithme n'est probablement pas en O(n^2 * log(n))");
