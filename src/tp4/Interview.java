@@ -34,12 +34,12 @@ public final class Interview {
         ArrayList<Integer> mauvaisOrdre = new ArrayList<>();
 
 
-        //Itération centres
+        // Iteration centres
         for (int valeurCentre : centers) {// O(n) * (O(n) + O(n) + O(n*log(n))) -> O(n) * O(n*log(n)) -> O(n^2*log(n))
             Point pointC = points.get(valeurCentre);
 
 
-            //Pour comparaisons PriorityQueue
+            // Pour comparaisons queue
             PriorityQueue<Point> pq = new PriorityQueue<>(pointsSize, (p1, p2) -> {
                 int d1 = pointC.compareTo(p1);
                 int d2 = pointC.compareTo(p2);
@@ -53,7 +53,7 @@ public final class Interview {
             });
 
 
-            //Ajoute points dans monceau
+            // Ajoute points a queue
             for (int i = 0; i < pointsSize; i++) {//O(n)
                 Point p = points.get(i);
                 p.setIndex(i);
@@ -63,7 +63,7 @@ public final class Interview {
             }
 
 
-            //Traite amis
+            // Traite amis
             for (int i = 0; i < circleSize; i++) {//O(n)
                 Point inCircle = pq.poll();
                 assert inCircle != null;

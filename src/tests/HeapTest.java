@@ -19,16 +19,8 @@ class HeapTest {
     void simpleInsertPop() {
         Heap<Integer> heap = new Heap<>();
         heap.insert(1);
-        heap.print();
         assertEquals(1, heap.size());
         assertEquals(1, heap.pop());
-        for (int i = 5; i > 0; i--) {
-            heap.insert(i);
-        }
-        heap.print();
-        for (int i = 0; i < 5; i++) {
-            System.out.print(heap.pop()+" ");
-        }
     }
 
     @Test
@@ -46,24 +38,18 @@ class HeapTest {
 
     @Test
     void simpleHeapWithList() {
-        Heap<Integer> heap = new Heap<>(List.of(1,2,3,4,5,6));
+        Heap<Integer> heap = new Heap<>(List.of(1, 2, 3, 4, 5, 6));
         assertEquals(6, heap.size());
         assertEquals(1, heap.pop());
 
-        System.out.print("début ");
-        heap.print();//
         heap.insert(0);
         assertEquals(6, heap.size());
-
-        System.out.print("début ");
-        heap.print();
-        assertEquals(0, heap.pop());//ici
-        heap.print();
+        assertEquals(0, heap.pop());
     }
 
     @Test
     void worksReverse() {
-        Heap<Integer> heap = new Heap<>(false, List.of(1,2,3,4,5,6));
+        Heap<Integer> heap = new Heap<>(false, List.of(1, 2, 3, 4, 5, 6));
         assertEquals(6, heap.size());
         assertEquals(6, heap.pop());
 
@@ -74,7 +60,7 @@ class HeapTest {
 
     @Test
     void worksWithPeek() {
-            Heap<Integer> heap = new Heap<>(false, List.of(1,2,3,4,5,6));
+        Heap<Integer> heap = new Heap<>(false, List.of(1, 2, 3, 4, 5, 6));
         assertEquals(6, heap.size());
         assertEquals(6, heap.peek());
 
@@ -100,8 +86,8 @@ class HeapTest {
             for (MockValue value : heap) {
                 totalBarometer += value.getBarometerCounter();
             }
-            Xs.add((double)listSize);
-            Ys.add((double)totalBarometer);
+            Xs.add((double) listSize);
+            Ys.add((double) totalBarometer);
         }
 
         LinearRegression regression = new LinearRegression(Xs.toArray(new Double[0]), Ys.toArray(new Double[0]));
@@ -134,8 +120,8 @@ class HeapTest {
             for (MockValue value : sorted) {
                 totalBarometer += value.getBarometerCounter();
             }
-            Xs.add((double)listSize);
-            Ys.add((double)totalBarometer);
+            Xs.add((double) listSize);
+            Ys.add((double) totalBarometer);
         }
 
         LinearRegression regression = new LinearRegression(Xs.toArray(new Double[0]), Ys.toArray(new Double[0]));
@@ -162,8 +148,8 @@ class HeapTest {
                 assertEquals(randomInts, heap.sort());
 
                 long totalBarometer = endTime - startTime;
-                Xs.add((double)listSize);
-                Ys.add((double)totalBarometer);
+                Xs.add((double) listSize);
+                Ys.add((double) totalBarometer);
             }
 
             LinearRegression regression = new LinearRegression(Xs.toArray(new Double[0]), Ys.toArray(new Double[0]));

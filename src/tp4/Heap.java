@@ -74,19 +74,6 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
         return idx < size();
     }
 
-    private int bonEnfant(int idx) {
-        int nouvelIdx = leftChildIdx(idx);
-        int droitIdx = rightChildIdx(idx);
-        boolean hasRightChild = hasIndex(droitIdx);
-
-        if (hasRightChild) {
-            if (compare(data.get(droitIdx), data.get(nouvelIdx))) {//idx.value<parent.value
-                nouvelIdx = droitIdx;
-            }
-        }
-        return nouvelIdx;
-    }
-
     // O(1): on echange deux elements dans le tableau
     private void swap(int firstIdx, int secondIdx) {
         // TODO
@@ -210,13 +197,5 @@ public class Heap<ValueType extends Comparable<? super ValueType>> implements It
         // TODO
         Iterator<ValueType> it = data.iterator();
         return it;
-    }
-
-    //POUR DÉBUGGAGE
-    public void print() {
-        for (ValueType value : data) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
     }
 }
