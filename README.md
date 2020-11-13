@@ -1,6 +1,6 @@
 # Monceau
 
-Implémentation et utilisation d'un monceau recherche.
+Implémentation et utilisation d'un monceau.
 
 Laboratoire : 4/5
 
