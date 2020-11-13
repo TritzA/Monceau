@@ -77,7 +77,6 @@ public final class Interview {
             }
         }
 
-
         // Sort queue dans arrayList
         int pqMauvaisAmisSize = pqMauvais.size();
         for (int i = 0; i < pqMauvaisAmisSize; i++) {// O(n) * O(log(n)) -> O(n*log(n))
