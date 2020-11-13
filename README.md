@@ -8,7 +8,7 @@ Cours : INF2010 Structures de données et algorithmes
 
 Partenaire : [Maxence Lefevre](https://github.com/Solonioka)
 
-Partenaire : [Abdourahmane Diawara]()
+Partenaire : [Abdourahmane Diawara](https://github.com/zullihy)
 
 ## Objectifs
 
