@@ -73,9 +73,9 @@ class InterviewTest {
 
     @Test
     void testComplexityInterviewWithTime() throws IOException {
-        assertTimeoutPreemptively(Duration.ofSeconds(60), () -> {//devrait être 60
-            int increaseRate = 100;//100
-            int maxSize = 3000;//3000 //2200 max avec un arraylist //2100 des doublons
+        assertTimeoutPreemptively(Duration.ofSeconds(60), () -> {
+            int increaseRate = 100;
+            int maxSize = 3000;
             ArrayList<Double> Xs = new ArrayList<>();
             ArrayList<Double> Ys = new ArrayList<>();
             for (int listSize = increaseRate; listSize < maxSize; listSize += increaseRate) {

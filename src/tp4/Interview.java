@@ -1,6 +1,5 @@
 package tp4;
 
-import java.sql.SQLOutput;
 import java.util.*;
 
 public final class Interview {
@@ -31,76 +30,59 @@ public final class Interview {
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {
         // TODO
         int pointsSize = points.size();
-        int centersSize = centers.size();
-        PriorityQueue<Integer> pqMauvaisAmis = new PriorityQueue<Integer>();
-        ArrayList<Integer> mauvaisEnOrdre = new ArrayList<Integer>();//liste à retourner
-        boolean[] amisConnus = new boolean[pointsSize];//tt à false par défaut, l'indice n indique si le nème ami est connu
-        boolean[] mauvaisAmis = new boolean[pointsSize];
+        PriorityQueue<Integer> pqMauvais = new PriorityQueue<>();
+        ArrayList<Integer> mauvaisOrdre = new ArrayList<>();
 
 
-        //Itération sur tous les centres
-        for (int valeurCentre : centers) {
-            Point pCentre = points.get(valeurCentre);//on trouve le point qu'est ce centre grâce à son indice
+        //Itération centres
+        for (int valeurCentre : centers) {// O(n) * (O(n) + O(n) + O(n*log(n))) -> O(n) * O(n*log(n)) -> O(n^2*log(n))
+            Point pointC = points.get(valeurCentre);
 
 
-            //Permettra à la PriorityQueue un sort selon la distance au centre
-            PriorityQueue<Point> pq = new PriorityQueue<Point>(pointsSize, new Comparator<Point>() {
-                @Override
-                public int compare(Point p1, Point p2) {
-                    int distance1 = pCentre.compareTo(p1);
-                    int distance2 = pCentre.compareTo(p2);
-                    if (distance1 > distance2) {
-                        return 1;
-                    } else if (distance1 < distance2) {
-                        return -1;
-                    } else {
-                        if (p1.getIndex() > p2.getIndex()) {
-                            return 1;
-                        } else if (p1.getIndex() < p2.getIndex()) {
-                            return -1;
-                        } else {
-                            System.out.println("Erreur : On compare un élément avec lui-même");
-                            return 0;
-                        }
-                    }
+            //Pour comparaisons PriorityQueue
+            PriorityQueue<Point> pq = new PriorityQueue<>(pointsSize, (p1, p2) -> {
+                int d1 = pointC.compareTo(p1);
+                int d2 = pointC.compareTo(p2);
+                if (d1 > d2) {
+                    return 1;
+                } else if (d1 < d2) {
+                    return -1;
+                } else {
+                    return p1.getIndex().compareTo(p2.getIndex());
                 }
             });
 
 
-            //Ajoute tous les points sauf le centre dans un monceau
-            for (int i = 0; i < pointsSize; i++) {//intération sur les points
+            //Ajoute points dans monceau
+            for (int i = 0; i < pointsSize; i++) {//O(n)
                 Point p = points.get(i);
-                p.setIndex(i);//on profite du passage dans les points pour stocker leur indice
-
-                if (p.getIndex() != valeurCentre) {
+                p.setIndex(i);
+                if (i != valeurCentre) {
                     pq.add(p);
                 }
             }
 
 
-            //Retire un nombre (circleSize) d'élément du monceau, ce sont les amis du groupe
-            for (int i = 0; i < circleSize; i++) {
+            //Traite amis
+            for (int i = 0; i < circleSize; i++) {//O(n)
                 Point inCircle = pq.poll();
+                assert inCircle != null;
                 int indiceAmi = inCircle.getIndex();
-                if (amisConnus[indiceAmi] && !mauvaisAmis[indiceAmi]) {
-                    //Il devient un mauvais amis
-                    pqMauvaisAmis.add(indiceAmi);
-                    mauvaisAmis[indiceAmi] = true;
+                if (inCircle.isConnu() && !inCircle.isMauvais()) {
+                    pqMauvais.add(indiceAmi);
+                    inCircle.setMauvais(true);
                 } else {
-                    //Sinon il devient un ami connu
-                    amisConnus[indiceAmi] = true;
+                    inCircle.setConnu(true);
                 }
             }
         }
 
-        // A cette étape, on a une liste qui contient tous les mauvais amis, mais cette liste est non triée
-        int pqMauvaisAmisSize = pqMauvaisAmis.size();
-        //Nous allons trier la liste à l'aide d'une priorityQueue
-        //System.out.println(pqMauvaisAmis);
-        for (int i = 0; i < pqMauvaisAmisSize; i++) {
-            //sortir les éléments du plus petit au plus grand
-            mauvaisEnOrdre.add(pqMauvaisAmis.poll());
+
+        // Sort queue dans arrayList
+        int pqMauvaisAmisSize = pqMauvais.size();
+        for (int i = 0; i < pqMauvaisAmisSize; i++) {//O(n) * O(log(n)) -> O(n*log(n))
+            mauvaisOrdre.add(pqMauvais.poll());//O(1) + O(log(n)) -> O(log(n))
         }
-        return mauvaisEnOrdre;
+        return mauvaisOrdre;
     }
 }

@@ -7,15 +7,22 @@ public class Point implements Comparable<Point> {
     private Integer y;
     private Integer index;
 
+    private boolean connu;
+    private boolean mauvais;
+
     public Point(String xy) {
         String[] xAndY = xy.split(" +");
         this.x = Integer.parseInt(xAndY[0]);
         this.y = Integer.parseInt(xAndY[1]);
+        this.connu = false;
+        this.mauvais = false;
     }
 
     public Point(Integer x, Integer y) {
         this.x = x;
         this.y = y;
+        this.connu = false;
+        this.mauvais = false;
     }
 
     @Override
@@ -45,5 +52,22 @@ public class Point implements Comparable<Point> {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public boolean isConnu() {
+        return connu;
+    }
+
+    public void setConnu(boolean connu) {
+        this.connu = connu;
+    }
+
+    public boolean isMauvais() {
+        return mauvais;
+    }
+
+
+    public void setMauvais(boolean mauvais) {
+        this.mauvais = mauvais;
     }
 }
