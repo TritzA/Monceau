@@ -12,7 +12,7 @@ Partenaire : [Abdourahmane Diawara](https://github.com/zullihy)
 
 ## Objectifs
 
-Implémenter un monceau à faible complexité algorithmique et l'utiliser pour résoudre un problème.
+Implémenter un monceau selon la complexité algorithmique demandée et l'utiliser pour résoudre un problème.
 
 ## Utilisations
 
