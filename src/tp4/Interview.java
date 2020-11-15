@@ -31,22 +31,22 @@ public final class Interview {
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {// O(n^2*log(n)) + O(n*log(n)) -> O(n^2*log(n))
         // TODO
         int pointsSize = points.size();
-        PriorityQueue<Integer> pqMauvais = new PriorityQueue<>();
-        ArrayList<Integer> mauvaisOrdre = new ArrayList<>();
+        PriorityQueue<Integer> pqBadFriends = new PriorityQueue<>();
+        ArrayList<Integer> badFriendsInOrder = new ArrayList<>();
 
 
         // Iteration centres
-        for (int valeurCentre : centers) {// O(c) * (O(n*log(n)) + O(a*log(n*n))) -> O(c*(n*log(n)+(a*log(n*n))))
-            Point pointC = points.get(valeurCentre);
+        for (int valueCenter : centers) {// O(c) * (O(n*log(n)) + O(a*log(n*n))) -> O(c*(n*log(n)+(a*log(n*n))))
+            Point pointC = points.get(valueCenter);
 
 
             // Pour comparaisons queue
-            PriorityQueue<Point> pqAmis = new PriorityQueue<>(pointsSize, (p1, p2) -> {
-                int d1 = pointC.compareTo(p1);
-                int d2 = pointC.compareTo(p2);
-                if (d1 > d2) {
+            PriorityQueue<Point> pqFriends = new PriorityQueue<>(pointsSize, (p1, p2) -> {
+                int distance1 = pointC.compareTo(p1);
+                int distance2 = pointC.compareTo(p2);
+                if (distance1 > distance2) {
                     return 1;
-                } else if (d1 < d2) {
+                } else if (distance1 < distance2) {
                     return -1;
                 } else {
                     return p1.getIndex().compareTo(p2.getIndex());
@@ -58,31 +58,31 @@ public final class Interview {
             for (int i = 0; i < pointsSize; i++) {// O(n) * O(log(n)) -> O(n*log(n))
                 Point p = points.get(i);
                 p.setIndex(i);
-                if (i != valeurCentre) {
-                    pqAmis.add(p);// O(log(n))
+                if (i != valueCenter) {
+                    pqFriends.add(p);// O(log(n))
                 }
             }
 
 
             // Traite amis
             for (int i = 0; i < circleSize; i++) {// O(a) * (O(log(n)) + O(log(n)) -> O(a*log(n*n))
-                Point ami = pqAmis.poll();// O(log(n))
-                assert ami != null;
-                int indiceAmi = ami.getIndex();
-                if (ami.isConnu() && !ami.isMauvais()) {
-                    pqMauvais.add(indiceAmi);// O(log(n))
-                    ami.setMauvais(true);
+                Point friend = pqFriends.poll();// O(log(n))
+                assert friend != null;
+                int friendIndex = friend.getIndex();
+                if (friend.isKnown() && !friend.isBadFriend()) {
+                    pqBadFriends.add(friendIndex);// O(log(n))
+                    friend.setBadFriend(true);
                 } else {
-                    ami.setConnu(true);
+                    friend.setKnown(true);
                 }
             }
         }
 
         // Sort queue dans arrayList
-        int pqMauvaisAmisSize = pqMauvais.size();
-        for (int i = 0; i < pqMauvaisAmisSize; i++) {// O(n) * O(log(n)) -> O(n*log(n))
-            mauvaisOrdre.add(pqMauvais.poll());// O(1) + O(log(n)) -> O(log(n))
+        int pqBadFriendsSize = pqBadFriends.size();
+        for (int i = 0; i < pqBadFriendsSize; i++) {// O(n) * O(log(n)) -> O(n*log(n))
+            badFriendsInOrder.add(pqBadFriends.poll());// O(1) + O(log(n)) -> O(log(n))
         }
-        return mauvaisOrdre;
+        return badFriendsInOrder;
     }
 }
