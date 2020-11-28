@@ -27,7 +27,7 @@ public final class Interview {
      * Il est peut etre possible d'avoir une meilleure complexite, soyez clair dans vos explications si vous croyez
      * avoir trouve :)
      */
-    // Complexite finale : O(c*(n*log(n)+(a*log(n*n)))) + O(n*log(n)) -> (si 'a' et 'c' tendent vers 'n') -> O(n^2*log(n))
+    // Complexite finale : O(c*(n*log(n)+(a*log(n)))) + O(n*log(n)) -> (si 'a' et 'c' tendent vers 'n') -> O(n^2*log(n))
     public static List<Integer> getFriendsToRemove(Integer circleSize, List<Integer> centers, List<Point> points) {// O(n^2*log(n)) + O(n*log(n)) -> O(n^2*log(n))
         // TODO
         int pointsSize = points.size();
@@ -36,7 +36,7 @@ public final class Interview {
 
 
         // Iteration centres
-        for (int valueCenter : centers) {// O(c) * (O(n*log(n)) + O(a*log(n*n))) -> O(c*(n*log(n)+(a*log(n*n))))
+        for (int valueCenter : centers) {// O(c) * (O(n*log(n)) + O(a*log(n))) -> O(c*(n*log(n)+(a*log(n))))
             Point pointC = points.get(valueCenter);
 
 
@@ -65,7 +65,7 @@ public final class Interview {
 
 
             // Traite amis
-            for (int i = 0; i < circleSize; i++) {// O(a) * (O(log(n)) + O(log(n)) -> O(a*log(n*n))
+            for (int i = 0; i < circleSize; i++) {// O(a) * (O(log(n)) + O(log(n)) -> O(a*log(n))
                 Point friend = pqFriends.poll();// O(log(n))
                 assert friend != null;
                 int friendIndex = friend.getIndex();
